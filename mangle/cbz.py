@@ -19,9 +19,9 @@ from zipfile import ZipFile, ZIP_STORED
 
 
 class Archive(object):
-    def __init__(self, path):
+    def __init__(self, path, ext):
         outputDirectory = os.path.dirname(path)
-        outputFileName = '%s.cbz' % os.path.basename(path)
+        outputFileName = '%s.%s' % (os.path.basename(path), ext)
         outputPath = os.path.join(outputDirectory, outputFileName)
         self.zipfile = ZipFile(outputPath, 'w', ZIP_STORED)
 
