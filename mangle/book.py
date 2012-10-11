@@ -19,12 +19,13 @@ import os.path
 import util
 from image import ImageFlags
 
+
 class Book(object):
     DefaultDevice = 'Kindle 4'
     DefaultOutputFormat = 'Images & CBZ'
     DefaultOverwrite = True
-    DefaultImageFlags = ImageFlags.Orient | ImageFlags.Resize | ImageFlags.Quantize
-
+    DefaultImageFlags = (ImageFlags.Orient | ImageFlags.Resize |
+                         ImageFlags.Quantize)
 
     def __init__(self):
         self.images = []
@@ -35,4 +36,3 @@ class Book(object):
         self.overwrite = Book.DefaultOverwrite
         self.imageFlags = Book.DefaultImageFlags
         self.outputFormat = Book.DefaultOutputFormat
-
