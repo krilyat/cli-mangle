@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.6
-
 import shutil
 import sys
 import os
@@ -10,7 +8,7 @@ import mangle.cbz
 import mangle.image
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:t:o:e:')
+    opts, args = getopt.getopt(sys.argv[1:], 'd:t:o:e:x')
 except getopt.GetoptError, err:
     print str(err)
     sys.exit(2)
@@ -21,6 +19,7 @@ book = Book()
 book.device = 'Kindle 4'
 book.outputFormat = 'CBZ only'
 book.title = 'Unknown'
+book.overwrite = False
 
 
 for o, a in opts:
@@ -32,6 +31,8 @@ for o, a in opts:
         book.outputFormat = a
     elif o == '-e':
         extension = a
+    elif o == '-x':
+         book.overwrite = True
 
 
 bookPath = os.path.join(directory, book.title)
