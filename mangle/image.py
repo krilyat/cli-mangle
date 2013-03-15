@@ -68,11 +68,31 @@ class KindleData:
         0xff, 0xff, 0xff,
     ]
 
+    Palette16 = [
+        0x00, 0x00, 0x00,
+        0x11, 0x11, 0x11,
+        0x22, 0x22, 0x22,
+        0x33, 0x33, 0x33,
+        0x44, 0x44, 0x44,
+        0x55, 0x55, 0x55,
+        0x66, 0x66, 0x66,
+        0x77, 0x77, 0x77,
+        0x88, 0x88, 0x88,
+        0x99, 0x99, 0x99,
+        0xaa, 0xaa, 0xaa,
+        0xbb, 0xbb, 0xbb,
+        0xcc, 0xcc, 0xcc,
+        0xdd, 0xdd, 0xdd,
+        0xee, 0xee, 0xee,
+        0xff, 0xff, 0xff,
+    ]
+
     Profiles = {
         'Kindle 1': ((600, 800), Palette4),
         'Kindle 2': ((600, 800), Palette15a),
         'Kindle 3': ((600, 800), Palette15a),
         'Kindle 4': ((600, 800), Palette15b),
+        'Kindle 5': ((768, 1024), Palette16),
         'Kindle DX': ((824, 1200), Palette15a),
         'Kindle DXG': ((824, 1200), Palette15a)
     }
@@ -80,8 +100,8 @@ class KindleData:
 
 def quantizeImage(image, palette):
     colors = len(palette) / 3
-    if colors < 256:
-        palette = palette + palette[:3] * (256 - colors)
+    #if colors < 256:
+    #    palette = palette + palette[:3] * (256 - colors)
 
     palImg = Image.new('P', (1, 1))
     palImg.putpalette(palette)
@@ -114,7 +134,8 @@ def resizeImage(image, size):
 
 def formatImage(image):
     if image.mode == 'RGB':
-        return image
+        #return image
+        return image.convert('L')
     return image.convert('RGB')
 
 
@@ -178,6 +199,6 @@ def convertImage(source, target, device, flags):
         image = quantizeImage(image, palette)
 
     try:
-        image.save(target)
+        image.save(target, quality=80)
     except IOError:
         raise RuntimeError('Cannot write image file %s' % target)

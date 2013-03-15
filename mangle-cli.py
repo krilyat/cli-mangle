@@ -14,12 +14,13 @@ except getopt.GetoptError, err:
     sys.exit(2)
 
 directory = '.'
-extension = 'cbz'
+extension = 'zip'
 book = Book()
-book.device = 'Kindle 4'
+book.device = 'Kindle 5'
 book.outputFormat = 'CBZ only'
 book.title = 'Unknown'
 book.overwrite = False
+book.imageFlags = (mangle.image.ImageFlags.Orient | mangle.image.ImageFlags.Resize)
 
 
 for o, a in opts:
@@ -44,7 +45,7 @@ if not os.path.isdir(bookPath):
 
 print('Found %d image files.' % len(args))
 for index in range(0, len(args)):
-    target = os.path.join(bookPath, '%05d.png' % index)
+    target = os.path.join(bookPath, '%05d.jpg' % index)
     print ('Converting file : %s' % args[index])
 
     mangle.image.convertImage(args[index], target, str(book.device),
