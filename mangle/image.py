@@ -199,6 +199,6 @@ def convertImage(source, target, device, flags):
         image = quantizeImage(image, palette)
 
     try:
-        image.save(target, quality=80)
+        image.save(target, quality=91)
     except IOError:
         raise RuntimeError('Cannot write image file %s' % target)
