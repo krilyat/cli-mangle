@@ -20,7 +20,8 @@ book.device = 'Kindle 5'
 book.outputFormat = 'CBZ only'
 book.title = 'Unknown'
 book.overwrite = False
-book.imageFlags = (mangle.image.ImageFlags.Orient | mangle.image.ImageFlags.Resize)
+book.imageFlags = (mangle.image.ImageFlags.Orient |
+                   mangle.image.ImageFlags.Resize)
 
 
 for o, a in opts:
@@ -33,7 +34,7 @@ for o, a in opts:
     elif o == '-e':
         extension = a
     elif o == '-x':
-         book.overwrite = True
+        book.overwrite = True
 
 
 bookPath = os.path.join(directory, book.title)

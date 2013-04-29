@@ -92,7 +92,7 @@ class KindleData:
         'Kindle 2': ((600, 800), Palette15a),
         'Kindle 3': ((600, 800), Palette15a),
         'Kindle 4': ((600, 800), Palette15b),
-        'Kindle 5': ((768, 1024), Palette16),
+        'Kindle 5': ((758, 1024), Palette16),
         'Kindle DX': ((824, 1200), Palette15a),
         'Kindle DXG': ((824, 1200), Palette15a)
     }
