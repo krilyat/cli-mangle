@@ -23,6 +23,7 @@ class Archive(object):
         outputDirectory = os.path.dirname(path)
         outputFileName = '%s.%s' % (os.path.basename(path), ext)
         outputPath = os.path.join(outputDirectory, outputFileName)
+        self.outputPath = outputPath
         self.zipfile = ZipFile(outputPath, 'w', ZIP_STORED)
 
     def addFile(self, filename):

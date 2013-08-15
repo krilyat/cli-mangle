@@ -2,10 +2,13 @@ import shutil
 import sys
 import os
 import getopt
+import logging as log
 
 from mangle.book import Book
 import mangle.cbz
 import mangle.image
+
+#log.basicConfig(level='DEBUG')
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'd:t:o:e:x')
@@ -36,23 +39,22 @@ for o, a in opts:
     elif o == '-x':
         book.overwrite = True
 
-
 bookPath = os.path.join(directory, book.title)
 
 archive = mangle.cbz.Archive(bookPath, extension)
-
+print "Creating %s" % archive.outputPath
 if not os.path.isdir(bookPath):
     os.makedirs(bookPath)
 
-print('Found %d image files.' % len(args))
+log.info('Found %d image files.' % len(args))
 for index in range(0, len(args)):
     target = os.path.join(bookPath, '%05d.jpg' % index)
-    print ('Converting file : %s' % args[index])
+    log.info('Converting file : %s' % args[index])
 
     mangle.image.convertImage(args[index], target, str(book.device),
                               book.imageFlags)
     archive.addFile(target)
-    print ('... OK')
+    log.info('... OK')
 
 
 if 'Image' not in book.outputFormat:

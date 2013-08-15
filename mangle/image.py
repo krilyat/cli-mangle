@@ -13,9 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import logging as log
 from PIL import Image, ImageDraw
-
 
 class ImageFlags:
     Orient = 1 << 0
@@ -133,10 +132,18 @@ def resizeImage(image, size):
 
 
 def formatImage(image):
+    log.info("image : %s" % image)
     if image.mode == 'RGB':
-        #return image
-        return image.convert('L')
-    return image.convert('RGB')
+        try:
+            return image.convert('L')
+        except IOError:
+            log.warning("IOError : image file is truncated putting original image instead")
+            return image
+    try:
+        return image.convert('RGB')
+    except IOError:
+        log.warning("IOError : image file is truncated putting original image instead")
+        return image
 
 
 def orientImage(image, size):
@@ -199,6 +206,6 @@ def convertImage(source, target, device, flags):
         image = quantizeImage(image, palette)
 
     try:
-        image.save(target, quality=91)
+        image.save(target, quality=90)
     except IOError:
         raise RuntimeError('Cannot write image file %s' % target)
