@@ -132,17 +132,16 @@ def resizeImage(image, size):
 
 
 def formatImage(image):
-    log.info("image : %s" % image)
     if image.mode == 'RGB':
         try:
             return image.convert('L')
         except IOError:
-            log.warning("IOError : image file is truncated putting original image instead")
+            log.warning("IOError : image file %s is truncated putting original image instead" % image.filename)
             return image
     try:
         return image.convert('RGB')
     except IOError:
-        log.warning("IOError : image file is truncated putting original image instead")
+        log.warning("IOError : image file %s is truncated putting original image instead" % image.filename)
         return image
 
 
